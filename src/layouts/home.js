@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
-import {Layout, Menu, Icon} from 'antd';
+import {Layout, Menu, Icon, Avatar} from 'antd';
+import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import './home.less';
+import MdcConfig from '../pages/mdcConfig.js'
+import MdcMonitor from '../pages/mdcMonitor.js'
+import imgSrc from "../assets/logo.png"
 
 const {SubMenu} = Menu;
 const {Header, Content, Footer, Sider} = Layout;
@@ -8,24 +12,29 @@ const {Header, Content, Footer, Sider} = Layout;
 class Home extends Component {
   render() {
     return (
-      <Layout className="layout">
-        <Header className="Menu">
-          <div className="logo"/>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            style={{lineHeight: '64px'}}
-          >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
-          </Menu>
-        </Header>
-        <Content style={{padding: '10px'}}>
-          <div className="content">Content</div>
-        </Content>
-      </Layout>
+      <Router>
+        <Layout className="layout">
+          <Header className="Menu">
+            <img className="logo" src={imgSrc} alt=""/>
+            <p className="title">AMD</p>
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={['1']}
+              style={{lineHeight: '64px'}}
+            >
+              <Menu.Item key="1"><Link to='/MdcMonitor'>MDC监控</Link></Menu.Item>
+              <Menu.Item key="2"><Link to='/MdcConfig'>MDC配置</Link></Menu.Item>
+            </Menu>
+          </Header>
+          <Content style={{margin: '0 10px', backgroundColor: '#fff'}}>
+            <Switch>
+              <Route path="/MdcConfig" component={MdcConfig}/>
+              <Route path="/MdcMonitor" component={MdcMonitor}/>
+            </Switch>
+          </Content>
+        </Layout>
+      </Router>
     );
   }
 }
