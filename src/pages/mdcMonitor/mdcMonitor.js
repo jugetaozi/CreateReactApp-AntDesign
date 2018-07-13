@@ -17,10 +17,10 @@ const rowSelection = {
 };
 
 const columns = [
-  { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
-  { title: 'Column 4', dataIndex: 'address', key: '4', width: 150 },
-  { title: 'Column 5', dataIndex: 'address', key: '5', width: 150 },
-  { title: 'Column 8', dataIndex: 'address', key: '8' },
+  {title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left'},
+  {title: 'Column 4', dataIndex: 'address', key: '4', width: 150},
+  {title: 'Column 5', dataIndex: 'address', key: '5', width: 150},
+  {title: 'Column 8', dataIndex: 'address', key: '8'},
   {
     title: 'Action',
     key: 'operation',
@@ -29,6 +29,11 @@ const columns = [
     render: () => <a href="javascript:;">action</a>,
   },
 ];
+const columns2 = [
+  {title: 'Column 4', dataIndex: 'address', key: '4', width: 90},
+  {title: 'Column 5', dataIndex: 'address', key: '5', width: 70},
+  {title: 'Column 8', dataIndex: 'address', key: '8', width: 70}
+];
 
 const data = [];
 for (let i = 0; i < 100; i++) {
@@ -36,7 +41,7 @@ for (let i = 0; i < 100; i++) {
     key: i,
     name: `Edrward ${i}`,
     age: 32,
-    address: `London Park no. ${i}`,
+    address: `Londo ${i}`,
   });
 }
 
@@ -80,11 +85,9 @@ class mdcMonitor extends Component {
           </Menu>
         </div>
         <div className="right_content">
-          <div className="card-container" style={{height: '100%', overflow: 'hidden'}}>
+          <div className="card-container" style={{height: '100%'}}>
             <Tabs onChange={this.onChange} type="card" className="card">
-              <TabPane tab={<span><Icon onClick={this.handleClick}
-                                        className="iconHover"
-                                        type="apple"/>Tab 1</span>}
+              <TabPane tab={<span><span className="runningDot"></span>Tab 1</span>}
                        key="1">
               </TabPane>
               <TabPane tab="Tab Title 2" key="2">
@@ -93,22 +96,41 @@ class mdcMonitor extends Component {
               </TabPane>
             </Tabs>
             <div className="panel">
-              <div className="warn">sadf</div>
+              <div className="warn"><span style={{color: 'red'}}>* </span> MDC实例运行中标识：<span className="runningDot"></span>；MDC实例停止标识：<span className="stopDot"></span></div>
               <div className="versionInfo">
                 <span className="v_num">版本号：V1.0.0</span>
                 <span className="userName">用户名：XXXXXXXXXXXXXXXXXXXXXX</span>
                 <span className="time">工作时间段：09:00:00 -18:00:00</span>
               </div>
-              <div className="operate">
-                <Button type="primary" className="operate_btn">添加输入行情源</Button>
-                <Button type="primary" className="delete_btn">删除输入行情源</Button>
+              <div className="flowMonitorTitle">
+                <p>流行情源配置：</p>
+              </div>
+              <div className="flowMonitor">
+                <div className="flowLeft">
+                  <Table columns={columns}
+                         className="flowTable"
+                         rowSelection={rowSelection}
+                         pagination={false}
+                         scroll={{x: 1500, y: 240}}
+                         footer={() => '共 3 条'}
+                         dataSource={data}/>
+                </div>
+                <div className="flowRight">
+                  <Table columns={columns2}
+                         className="vssTable"
+                         pagination={false}
+                         scroll={{x: 380, y: 214}}
+                         title={() => 'VSS连接MDC 1-1-1-1情况：'}
+                         footer={() => '共 3 条'}
+                         dataSource={data}/>
+                </div>
               </div>
               <Table columns={columns}
-                     className="table"
+                     className="fileTable"
                      rowSelection={rowSelection}
                      pagination={false}
-                     scroll={{x:1500, y: 240 }}
-                     title={() => '流行情源配置：'}
+                     scroll={{x: 1500, y: 240}}
+                     title={() => '文件行情源配置：'}
                      footer={() => '共 3 条'}
                      dataSource={data}/>
             </div>

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Layout, Menu, Icon, Avatar} from 'antd';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import './home.less';
-import MdcConfig from '../pages/mdcConfig.js'
-import MdcMonitor from '../pages/mdcMonitor.js'
+import MdcConfig from '../pages/mdcConfig/mdcConfig.js'
+import MdcMonitor from '../pages/mdcMonitor/mdcMonitor.js'
 import imgSrc from "../assets/logo.png"
 
 const {SubMenu} = Menu;
@@ -20,16 +20,16 @@ class Home extends Component {
             <Menu
               theme="dark"
               mode="horizontal"
-              defaultSelectedKeys={['1']}
+              defaultSelectedKeys={['2']}
               style={{lineHeight: '64px'}}
             >
               <Menu.Item key="1"><Link to='/MdcMonitor'>MDC监控</Link></Menu.Item>
-              <Menu.Item key="2"><Link to='/MdcConfig'>MDC配置</Link></Menu.Item>
+              <Menu.Item key="2"><Link to='/'>MDC配置</Link></Menu.Item>
             </Menu>
           </Header>
           <Content style={{margin: '0 10px', backgroundColor: '#fff'}}>
             <Switch>
-              <Route path="/MdcConfig" component={MdcConfig}/>
+              <Route path="/" exact component={MdcConfig}/>
               <Route path="/MdcMonitor" component={MdcMonitor}/>
             </Switch>
           </Content>
